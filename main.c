@@ -45,9 +45,9 @@ int main(void) {
       // turn on line (display row i)
       HW_PinSet((pin_t)(i + 5)); // scanline pins are at offset 5
 
-      // delay(500);
+      delay(1);
       HW_PinClear((pin_t)(i + 5));
-      // delay(500);
+      delay(1);
     }
   }
 }
