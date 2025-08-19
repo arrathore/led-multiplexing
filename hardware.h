@@ -5,14 +5,26 @@
 
 #include <stdint.h>
 
-// logical pins for Port E
+// logical pins
 typedef enum {
+  // Port D
+  PIN_PD0,
+  PIN_PD1,
+  PIN_PD2,
+  PIN_PD3,
+  // PIN_PD4, [used in UART]
+  // PIN_PD5,
+  PIN_PD6,
+  // PIN_PD7, [used in JTAG]
+
+  // Port E
   PIN_PE0,
   PIN_PE1,
   PIN_PE2,
   PIN_PE3,
   PIN_PE4,
   PIN_PE5,
+  
   PIN_COUNT
 } pin_t;
 
