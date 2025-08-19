@@ -7,11 +7,15 @@
 #include "hardware.h"
 #include <stdint.h>
 
-int get_width(void) {
+uint32_t get_width(void) {
   return 4;
 }
 
-int get_height(void) {
+uint32_t get_height(void) {
+  return 4;
+}
+
+uint32_t get_refresh_speed(void) {
   return 4;
 }
 

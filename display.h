@@ -6,12 +6,14 @@
 #include <stdint.h>
 
 // how many pixels wide is the display?
-int get_width(void);
+uint32_t get_width(void);
 // how many pixels tall is the display?
-int get_height(void);
+uint32_t get_height(void);
+// about how long does it take to draw one frame?
+uint32_t get_refresh_speed(void);
 
 // run any hardware initialization needed
-void display_initialize();
+void display_initialize(void);
 
 /**
    draw an image encoded as an array of 1s and 0s
