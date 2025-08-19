@@ -29,7 +29,7 @@ void display_initialize() {
 }
 
 // expects SysTick_Init() already called
-void delay(uint32_t millis) {
+static void delay(uint32_t millis) {
   for (uint32_t i = 0; i < millis; i++) {
     // wait until COUNTFLAG is set
     while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0);
@@ -53,6 +53,5 @@ void draw(const uint8_t img[4][4]) {
     
     delay(1);
     HW_PinClear((pin_t)(i + 5));
-    delay(1);
   }
 }
