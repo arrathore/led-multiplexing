@@ -20,16 +20,33 @@ void delay(uint32_t millis) {
   }
 }
 
+static const uint8_t img[4][4] = {
+  {0, 1, 1, 0},
+  {1, 0, 0, 1},
+  {1, 0, 0, 1},
+  {0, 1, 1, 0},
+};
+
 int main(void) {
   SysTick_Init();
 
   HW_Init();
 
   while (1) {
-    for (int i = 0; i < 4; i++) { // we have 4 "scanlines"
-      HW_PinSet((pin_t)i);
+    // for each row
+    for (int i = 0; i < 4; i++) {
+      // turn on line
+      HW_PinSet((pin_t)(i + 5)); // scanline pins are at offset 5
+
+      // draw row i
+      for (int j = 0; j < 4; j++) {
+	// if the LED should be off, we turn on the pin
+	if (img[i][j] == 0) HW_PinSet((pin_t)j);
+	else HW_PinClear((pin_t)j);
+      }
+      
       delay(500);
-      HW_PinClear((pin_t)i);
+      HW_PinClear((pin_t)(i + 5));
       delay(500);
     }
   }
