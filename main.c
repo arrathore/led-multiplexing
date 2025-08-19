@@ -35,9 +35,6 @@ int main(void) {
   while (1) {
     // for each row
     for (int i = 0; i < 4; i++) {
-      // turn on line
-      HW_PinSet((pin_t)(i + 5)); // scanline pins are at offset 5
-
       // draw row i
       for (int j = 0; j < 4; j++) {
 	// if the LED should be off, we turn on the pin
@@ -45,9 +42,12 @@ int main(void) {
 	else HW_PinClear((pin_t)j);
       }
       
-      delay(500);
+      // turn on line (display row i)
+      HW_PinSet((pin_t)(i + 5)); // scanline pins are at offset 5
+
+      // delay(500);
       HW_PinClear((pin_t)(i + 5));
-      delay(500);
+      // delay(500);
     }
   }
 }
