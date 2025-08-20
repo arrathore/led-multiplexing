@@ -47,15 +47,15 @@ void draw(const uint8_t img[4][4]) {
   for (int i = 0; i < 4; i++) {
     // draw row i
     for (int j = 0; j < 4; j++) {
-      // if the LED should be off, we turn on the pin
-      if (img[i][j] == 0) HW_PinSet((pin_t)j);
-      else HW_PinClear((pin_t)j);
+      // if the LED should be off, we turn on the pin (Port D)
+      if (img[i][j] == 0) HW_PinSet((out_pin_t)j);
+      else HW_PinClear((out_pin_t)j);
     }
 
     // turn on line (display row i)
-    HW_PinSet((pin_t)(i + 5)); // scanline pins are at offset 5
+    HW_PinSet((out_pin_t)(i + 4)); // scanline pins are at offset 4 (Port E)
     
     delay(1);
-    HW_PinClear((pin_t)(i + 5));
+    HW_PinClear((out_pin_t)(i + 4));
   }
 }

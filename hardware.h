@@ -14,7 +14,7 @@ typedef enum {
   PIN_PD3,
   // PIN_PD4, [used in UART]
   // PIN_PD5,
-  PIN_PD6,
+
   // PIN_PD7, [used in JTAG]
 
   // Port E
@@ -25,14 +25,23 @@ typedef enum {
   PIN_PE4,
   PIN_PE5,
   
-  PIN_COUNT
-} pin_t;
+  OUT_PIN_COUNT
+} out_pin_t;
+
+typedef enum {
+  // Port D
+  PIN_PD6,
+
+  IN_PIN_COUNT
+} in_pin_t;
 
 // HAL functions 
 void HW_Init(void);
-void HW_PinInit(pin_t pin);
-void HW_PinSet(pin_t pin);
-void HW_PinClear(pin_t pin);
-void HW_PinToggle(pin_t pin);
+void HW_InPinInit(in_pin_t pin);
+void HW_OutPinInit(out_pin_t pin);
+uint32_t HW_PinRead(in_pin_t pin);
+void HW_PinSet(out_pin_t pin);
+void HW_PinClear(out_pin_t pin);
+void HW_PinToggle(out_pin_t pin);
 
 #endif

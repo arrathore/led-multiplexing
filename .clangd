@@ -2,7 +2,6 @@ Diagnostics:
   # the machine that will be compiling this code will have the missing pieces clang is complaining about
   Suppress: 
     - undeclared_var_use
-
     - pp_file_not_found
     - unresolved-included-file
     - unknown_typename
