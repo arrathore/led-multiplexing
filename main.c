@@ -19,15 +19,8 @@ static void delay(uint32_t millis) {
 
 void switch_animation(void) {
   ani_num++;
-  if (ani_num > 2) ani_num = 0;
+  if (ani_num > animation_count - 1) ani_num = 0;
 }
-
-static const uint8_t test_img[4][4] = {
-  {0, 1, 1, 2},
-  {0, 1, 1, 2},
-  {0, 1, 1, 2},
-  {0, 1, 1, 2},
-};
 
 static inline const uint8_t* get_frame(const animation_t *ani, uint8_t frame_idx) {
   return ani->frames + frame_idx * ani->frame_width * ani->frame_height;
@@ -42,7 +35,7 @@ int main(void) {
   // display the selected animation
   while (1) {
     animation_t ani = *animations[ani_num];
-    for (int i = 0; i < ani.length; i++) {
+    for (uint32_t i = 0; i < ani.length; i++) {
       // get the current frame
       const uint8_t *frame_ptr = get_frame(&ani, i);
       // draw each frame for the specified length

@@ -266,4 +266,4 @@ static animation_t slide = {
 
 // list of all animations
 static const animation_t *animations[] = {&pulse, &orbit, &slide};
-
+static const uint8_t animation_count = 3;
