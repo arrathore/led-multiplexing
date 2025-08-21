@@ -6,8 +6,16 @@
 
 #include <stdint.h>
 
-#define ANIMATION_PULSE_LENGTH 8
-static const uint8_t animation_pulse[ANIMATION_PULSE_LENGTH][4][4] = {
+typedef struct {
+  uint8_t frame_width;
+  uint8_t frame_height;
+  uint32_t length; // number of frames
+  uint8_t speed; // how long to show each frame (ms)
+
+  const uint8_t* frames;
+} animation_t;
+
+static const uint8_t animation_pulse[8][4][4] = {
   {
     {0, 0, 0, 0},
     {0, 0, 0, 0},
@@ -58,8 +66,7 @@ static const uint8_t animation_pulse[ANIMATION_PULSE_LENGTH][4][4] = {
   },
 };
 
-#define ANIMATION_ORBIT_LENGTH 8
-static const uint8_t animation_orbit[ANIMATION_ORBIT_LENGTH][4][4] = {
+static const uint8_t animation_orbit[8][4][4] = {
   {
     {2, 2, 0, 0},
     {2, 2, 0, 0},
@@ -110,8 +117,19 @@ static const uint8_t animation_orbit[ANIMATION_ORBIT_LENGTH][4][4] = {
   },  
 };
 
-#define ANIMATION_SLIDE_LENGTH 12
-static const uint8_t animation_slide[ANIMATION_SLIDE_LENGTH][4][4] = {
+static const uint8_t animation_slide[20][4][4] = {
+  {
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+  },
+  {
+    {1, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+  },
   {
     {2, 1, 0, 0},
     {1, 0, 0, 0},
@@ -147,6 +165,30 @@ static const uint8_t animation_slide[ANIMATION_SLIDE_LENGTH][4][4] = {
     {0, 0, 0, 1},
     {0, 0, 1, 2},
     {0, 1, 2, 1},
+  },
+  {
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 1},
+    {0, 0, 1, 2},
+  },
+  {
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 1},
+  },
+  {
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+  },
+  {
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 1},
   },
   {
     {0, 0, 0, 0},
@@ -184,4 +226,44 @@ static const uint8_t animation_slide[ANIMATION_SLIDE_LENGTH][4][4] = {
     {1, 0, 0, 0},
     {0, 0, 0, 0},
   },
+  {
+    {2, 1, 0, 0},
+    {1, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+  },
+  {
+    {1, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+    {0, 0, 0, 0},
+  },  
 };
+
+static animation_t pulse = {
+  .frame_height = 4, .frame_width = 4, // 4x4 res
+  .length = 8, // 8 frames
+  .speed = 50, // 50 ms per frame (20 fps)
+
+  .frames = (const uint8_t *)animation_pulse,
+};
+
+static animation_t orbit = {
+  .frame_height = 4, .frame_width = 4,
+  .length = 8,
+  .speed = 30, // (33.33 fps)
+
+  .frames = (const uint8_t *)animation_orbit,
+};
+
+static animation_t slide = {
+  .frame_height = 4, .frame_width = 4,
+  .length = 20,
+  .speed = 50, // (20 fps)
+
+  .frames = (const uint8_t *)animation_slide,
+};
+
+// list of all animations
+static const animation_t *animations[] = {&pulse, &orbit, &slide};
+
