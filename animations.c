@@ -54,15 +54,9 @@ static const uint8_t animation_orbit[ANIMATION_ORBIT_LENGTH][4][4] = {
   },  
 };
 
-#define ANIMATION_SLIDE_LENGTH 9
+#define ANIMATION_SLIDE_LENGTH 12
 static const uint8_t animation_slide[ANIMATION_SLIDE_LENGTH][4][4] = {
   {
-    {0, 0, 0, 0},
-    {0, 0, 0, 0},
-    {0, 0, 0, 0},
-    {0, 0, 0, 0},
-  },
-  {
     {1, 0, 0, 0},
     {0, 0, 0, 0},
     {0, 0, 0, 0},
@@ -107,6 +101,30 @@ static const uint8_t animation_slide[ANIMATION_SLIDE_LENGTH][4][4] = {
   {
     {0, 0, 0, 0},
     {0, 0, 0, 0},
+    {0, 0, 0, 1},
+    {0, 0, 1, 0},
+  },
+    {
+    {0, 0, 0, 0},
+    {0, 0, 0, 1},
+    {0, 0, 1, 0},
+    {0, 1, 0, 0},
+  },
+  {
+    {0, 0, 0, 1},
+    {0, 0, 1, 0},
+    {0, 1, 0, 0},
+    {1, 0, 0, 0},
+  },
+  {
+    {0, 0, 1, 0},
+    {0, 1, 0, 0},
+    {1, 0, 0, 0},
+    {0, 0, 0, 0},
+  },
+  {
+    {0, 1, 0, 0},
+    {1, 0, 0, 0},
     {0, 0, 0, 0},
     {0, 0, 0, 0},
   },
