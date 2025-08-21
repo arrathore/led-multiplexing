@@ -8,6 +8,8 @@
 #include "animations.c"
 #include <stdint.h>
 
+volatile uint8_t ani_num;
+
 static void delay(uint32_t millis) {
   for (uint32_t i = 0; i < millis; i++) {
     // wait until COUNTFLAG is set
@@ -15,18 +17,25 @@ static void delay(uint32_t millis) {
   }
 }
 
-
+void switch_animation(void) {
+  ani_num = 1 - ani_num;  
+}
 
 int main(void) {
-  display_initialize();
+  display_initialize(); // also calls HW_Init()
+
+  // set interrupt for animation switching
+  HW_PinAttachInterrupt(PIN_PD6, EDGE_FALLING, switch_animation);
+  
   // display a short animation
-  uint8_t ani_num = 0;
   while (1) {
 
+    /*
     // switch animation on input
     if (HW_PinRead(PIN_PD6) == 0U) {
       ani_num = 1 - ani_num;
     }
+    */
 
     if (ani_num == 0) {
       for (int i = 0; i < ANIMATION_ORBIT_LENGTH; i++) {

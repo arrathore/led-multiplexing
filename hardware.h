@@ -5,7 +5,7 @@
 
 #include <stdint.h>
 
-// logical pins
+// logical input pins
 typedef enum {
   // Port D
   PIN_PD0,
@@ -28,6 +28,7 @@ typedef enum {
   OUT_PIN_COUNT
 } out_pin_t;
 
+// logical output pins
 typedef enum {
   // Port D
   PIN_PD6,
@@ -35,13 +36,36 @@ typedef enum {
   IN_PIN_COUNT
 } in_pin_t;
 
-// HAL functions 
+// interrupt triggers
+typedef enum {
+  EDGE_FALLING,
+  EDGE_RISING,
+  EDGE_BOTH
+} edge_t;
+
+// HAL functions
+// perform any needed initialization
 void HW_Init(void);
+
+// initialize an input pin
 void HW_InPinInit(in_pin_t pin);
+
+// initialize an output pin
 void HW_OutPinInit(out_pin_t pin);
+
+// read an input pin
 uint32_t HW_PinRead(in_pin_t pin);
+
+// attach an interrupt to an input pin
+void HW_PinAttachInterrupt(in_pin_t pin, edge_t edge, void(*callback)(void));
+
+// set an output pin
 void HW_PinSet(out_pin_t pin);
+
+// clear an output pin
 void HW_PinClear(out_pin_t pin);
+
+// toggle an output pin
 void HW_PinToggle(out_pin_t pin);
 
 #endif
