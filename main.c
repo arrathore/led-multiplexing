@@ -19,17 +19,15 @@ static void delay(uint32_t millis) {
 
 void switch_animation(void) {
   ani_num++;
-  if (ani_num > 2) ani_num = 0;
+  if (ani_num > 3) ani_num = 0;
 }
 
-/*
 static const uint8_t test_img[4][4] = {
   {0, 1, 1, 2},
   {0, 1, 1, 2},
   {0, 1, 1, 2},
   {0, 1, 1, 2},
 };
-*/
 
 int main(void) {
   display_initialize(); // also calls HW_Init()
@@ -40,8 +38,6 @@ int main(void) {
   // display a short animation
   while (1) {
 
-    // draw(test_img);
-        
     if (ani_num == 0) {
       for (int i = 0; i < ANIMATION_ORBIT_LENGTH; i++) {
 	// draw each frame for 25 ms (40 hz)
@@ -66,6 +62,8 @@ int main(void) {
 	  while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0); // display_initialize also initializes SysTick
 	}
       }
+    } else {
+      draw(test_img);
     }
   }
 }
