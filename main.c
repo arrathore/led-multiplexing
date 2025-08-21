@@ -18,8 +18,18 @@ static void delay(uint32_t millis) {
 }
 
 void switch_animation(void) {
-  ani_num = 1 - ani_num;  
+  ani_num++;
+  if (ani_num > 2) ani_num = 0;
 }
+
+/*
+static const uint8_t test_img[4][4] = {
+  {0, 1, 1, 2},
+  {0, 1, 1, 2},
+  {0, 1, 1, 2},
+  {0, 1, 1, 2},
+};
+*/
 
 int main(void) {
   display_initialize(); // also calls HW_Init()
@@ -30,13 +40,8 @@ int main(void) {
   // display a short animation
   while (1) {
 
-    /*
-    // switch animation on input
-    if (HW_PinRead(PIN_PD6) == 0U) {
-      ani_num = 1 - ani_num;
-    }
-    */
-
+    // draw(test_img);
+        
     if (ani_num == 0) {
       for (int i = 0; i < ANIMATION_ORBIT_LENGTH; i++) {
 	// draw each frame for 25 ms (40 hz)
@@ -45,11 +50,19 @@ int main(void) {
 	  while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0); // display_initialize also initializes SysTick
 	}
       }
-    } else {
+    } else if (ani_num == 1) {
       for (int i = 0; i < ANIMATION_SLIDE_LENGTH; i++) {
 	// draw each frame for 25 ms (40 hz)
 	for (uint32_t j = 0; j < 25u / get_refresh_speed(); j++) {
 	  draw(animation_slide[i]);
+	  while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0); // display_initialize also initializes SysTick
+	}
+      }
+    } else if (ani_num == 2) {
+      for (int i = 0; i < ANIMATION_PULSE_LENGTH; i++) {
+	// draw each frame for 25 ms (40 hz)
+	for (uint32_t j = 0; j < 25u / get_refresh_speed(); j++) {
+	  draw(animation_pulse[i]);
 	  while ((SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) == 0); // display_initialize also initializes SysTick
 	}
       }

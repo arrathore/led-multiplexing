@@ -53,8 +53,8 @@ static void udelay(uint32_t micros) {
 void draw(const uint8_t img[4][4]) {
   // for each row
   for (int i = 0; i < 4; i++) {
-    // which pixels are at half-brightness
-    uint8_t halfs[] = {0, 0, 0, 0};
+    // which pixels are at low-brightness
+    uint8_t lows[] = {0, 0, 0, 0};
     
     // draw row i
     for (int j = 0; j < 4; j++) {
@@ -62,16 +62,16 @@ void draw(const uint8_t img[4][4]) {
       if (img[i][j] == 0) HW_PinSet((out_pin_t)j);
       else {
 	HW_PinClear((out_pin_t)j);
-	halfs[j] = img[i][j];
+	lows[j] = img[i][j];
       }
     }
 
     // turn on line (display row i)
     HW_PinSet((out_pin_t)(i + 4)); // scanline pins are at offset 4 (Port E)
 
-    // if the pixel is half brightness we turn it off early
+    // if the pixel is low-brightness we turn it off early
     udelay(100);
-    for (int j = 0; j < 4; j++) if (halfs[j] == 1) HW_PinSet((out_pin_t)j);
+    for (int j = 0; j < 4; j++) if (lows[j] == 1) HW_PinSet((out_pin_t)j);
     udelay(900);
     HW_PinClear((out_pin_t)(i + 4));
   }
